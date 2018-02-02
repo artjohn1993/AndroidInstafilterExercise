@@ -1,8 +1,10 @@
 package co.blackfintech.instafilter.activities
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
@@ -23,7 +25,6 @@ import java.io.IOException
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 class PhotoFilterActivity : AppCompatActivity() {
-
   // region Variables
   companion object {
 
@@ -149,6 +150,8 @@ class PhotoFilterActivity : AppCompatActivity() {
     try {
       out = FileOutputStream(file)
       bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
+      scanFile(this,Uri.fromFile(file))
+
     } catch (e: Exception) {
       e.printStackTrace()
     } finally {
@@ -160,6 +163,11 @@ class PhotoFilterActivity : AppCompatActivity() {
       setResult(Activity.RESULT_OK)
       finish()
     }
+  }
+  private fun scanFile(context: Context, imageUri: Uri){
+    val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+    intent.setData(imageUri)
+    context.sendBroadcast(intent)
   }
   // endregion
 }
