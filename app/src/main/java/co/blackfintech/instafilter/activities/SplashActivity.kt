@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_splash.*
 import org.jetbrains.anko.intentFor
 
 // Hi, this is a comment.
-//test 2
+//test 3
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 class SplashActivity : AppCompatActivity() {
 
